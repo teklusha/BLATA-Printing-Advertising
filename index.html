@@ -1,763 +1,857 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Font Awesome Test</title>
+  <title>BLATA Printing & Advertising</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-<html data-theme="dark"> <!-- or toggle via JS -->
-
-  </html>
-  
-</head>
- <style>
-  body {
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  <style>
+    :root {
+      --primary: #004080;
+      --accent1: #e74c3c;
+      --accent2: #3498db;
+      --accent3: #2ecc71;
+      --accent4: #f1c40f;
+      --success: #2ecc71;
+      --danger: #e74c3c;
     }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #f2f2f2, #e0f7fa);
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(to right,skyblue, skyblue);
       color: #333;
-      line-height: 2;
-      position: relative;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
     }
-
     header, footer {
-      background: #004080;
+      background: var(--primary);
       color: white;
       text-align: center;
-      padding: 1em 0;
+      padding: 1em 0 0 0;
       position: relative;
     }
-
+     /* Header Styles */
     .developer-info {
-  position: absolute;
-  top: 8px; /* higher placement */
-  right: 8px;
-  font-size: 0.8em;
-  background: rgba(0, 0, 0, 0.4);
-  color: white;
-  padding: 4px 10px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  z-index: 999;
-}
+      position: relative;
+      top: var(--space-xs);
+      right: var(--space-xs);
+      z-index: 10;
+    }
 
-.developer-info img {
-  width: 28px;
-  height: 28px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1px solid white;
-}
-
-
-    .nav-toggle {
-      display: none;
-      font-size: 30px;
-      position: absolute;
-      right: 20px;
-      top: 20px;
+    .developer-info img {
+      width: 8px;
+      height: 8px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid white;
       cursor: pointer;
+      transition: 
+        transform var(--transition-speed) ease,
+        box-shadow var(--transition-speed) ease;
     }
 
-    nav {
-      background-color: #004080;
+    .developer-info img:hover,
+    .developer-info img:focus {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 3px var(--accent1);
+      outline: none;
     }
 
-    nav ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      flex-wrap: wrap;
+    .lang-switcher {
+      position: absolute; left: 10px; top: 10px; z-index: 40;
     }
-
-    nav ul li {
-      margin: 0 15px;
+    .lang-switcher button {
+      background: #fff; color: #004080; border: 1px solid #004080;
+      border-radius: 6px; font-weight: bold; font-size: 1em;
+      padding: 4px 11px; cursor: pointer; margin-right: 4px;
+      transition: background 0.2s, color 0.2s;
     }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
+    .lang-switcher button.active, .lang-switcher button:focus {
+      background: #004080; color: #fff;
+      outline: 2px solid #ffeb3b;
     }
-
+    .nav-toggle {
+      display: none; font-size: 30px;
+      position: absolute; right: 20px; top: 30px;
+      cursor: pointer; z-index: 30;
+    }
+    .background-images {
+      display: flex; width: 100%; height: 180px;
+      overflow: hidden; position: relative;
+    }
+    .background-images img {
+      flex: 1; object-fit: cover; width: 100%; height: 100%;
+    }
+    .background-images .stretch-horizontal {
+      transform: scaleX(1.5); transform-origin: center;
+    }
+    .header-content {
+      padding: 10px; display: flex;
+      justify-content: space-between; align-items: flex-start;
+      background-color: var(--primary); color: white; margin-bottom: 0;
+    }
+    .header-image {
+      width: 100%; height: auto; transform: scaleY(1);
+      transform-origin: bottom; display: block; margin: 0; padding: 0;
+      line-height: 0; border: none;
+    }
+    .nav-over-image {
+      position: absolute; top: 11.5%; left: 0; width: 40%;
+      display: flex; justify-content: center; z-index: 15;
+      background: rgba(0, 64, 128, 0.96); padding: 8px 0;
+    }
+    .nav-over-image ul {
+      margin: 0; padding: 0; list-style: none; display: flex; gap: 18px;
+    }
+    .nav-over-image ul li a {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 15px; border-radius: 99px; text-decoration: none;
+      font-size: 1rem; font-weight: bold; color: white;
+      transition: background 0.3s;
+    }
+    .nav-over-image ul li:nth-child(1) a { background-color: var(--accent1); }
+    .nav-over-image ul li:nth-child(2) a { background-color: var(--accent2); }
+    .nav-over-image ul li:nth-child(3) a { background-color: var(--accent3); }
+    .nav-over-image ul li:nth-child(4) a { background-color: var(--accent4); color: black; }
+    .nav-over-image ul li a:focus, .nav-over-image ul li a:hover { filter: brightness(1.1); outline: 2px solid #222; }
     .hero {
       background: linear-gradient(to right, #ff4081, #ffeb3b);
-      color: #222;
-      text-align: center;
-      padding: 60px 20px;
+      color: #222; text-align: center; padding: 44px 10px 40px 10px;
     }
-
-    .hero h2 {
-      font-size: 2.8em;
-      margin-bottom: 10px;
+    .hero h2 { font-size: 2em; margin-bottom: 10px; }
+    .hero button {
+      font-size: 1rem; padding: 8px 20px; border-radius: 30px; border: none;
+      background: #004080; color: #fff; margin-top: 20px; cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: background 0.2s;
     }
-
-    section {
-      padding: 2em 20px;
-      max-width: 1000px;
-      margin: auto;
+    .hero button:focus, .hero button:hover {
+      background: #002f5c; outline: 2px solid #222;
     }
-
-    .services, .contact, .order-form {
-      background: white;
-      padding: 1.5em;
-      margin: 1em auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    section { padding: 1.3em 4vw; max-width: 1000px; margin: auto; }
+    h1, h2 { text-align: center; margin: 0.5em 0 0.4em 0; }
+    .services, .contact, .order-form, .portfolio, .testimonials, .news {
+      background: white; padding: 1.5em; margin: 1em auto; border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
     }
-
     .service-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px;
-      text-align: center;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem; margin-top: 1rem; padding: 0.5rem; text-align: center;
     }
-
     .service-card {
-      background: #f0f8ff;
-      padding: 1em;
-      border-radius: 10px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      background-color: #f4f4f4; color: #1a1a1a;
+      padding: 0.7rem 0.3rem; border-radius: 12px; font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.18s, background-color 0.2s; min-width: 105px;
     }
-
-    form label, form input, form textarea, form select {
+    .service-card a { color: inherit; text-decoration: none; font-size: 1rem; }
+    .service-card:focus-within, .service-card:hover {
+      transform: translateY(-4px) scale(1.06);
+      background-color: #e0e0e0; outline: 2px solid #1976d2;
+    }
+    .image-section {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center; margin: 1.5rem 0 1rem 0;
+      padding: 0.5rem; border-bottom: 1px solid #eee;
+    }
+    .image-section img {
+      max-width: 320px; width: 100%; height: auto; border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06); transition: transform 0.25s;
+    }
+    .image-section img:focus, .image-section img:hover { transform: scale(1.07); outline: 2px solid #004080; }
+    .order-form {
+      max-width: 600px; margin: 0 auto 2em auto; display: grid; gap: 13px;
+      padding: 20px; border-radius: 10px; background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .order-form label { font-weight: 600; }
+    .order-form input, .order-form select, .order-form textarea {
+      padding: 8px; border: 1px solid #ccc; border-radius: 6px;
+      font-size: 1rem; width: 100%; margin-bottom: 1em; transition: border-color 0.2s;
+    }
+    .order-form input:focus, .order-form select:focus, .order-form textarea:focus {
+      border-color: #007bff; outline: 2px solid #1976d2;
+    }
+    .order-form textarea { resize: vertical; }
+    .order-form button {
+      padding: 12px; background-color: #007bff; color: white; border: none;
+      font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 1.1rem;
+      margin-top: 0.5em; transition: background 0.2s;
+    }
+    .order-form button:focus, .order-form button:hover {
+      background-color: #0056b3; outline: 2px solid #1976d2;
+    }
+    .contact a, .contact a:visited {
+      color: #007bff; text-decoration: underline; word-break: break-all;
+    }
+    .contact a:focus, .contact a:hover { color: #ff4081; }
+    iframe {
+      border-radius: 12px; border: 0; margin-top: 14px;
+    }
+    .portfolio {
+      background: #f5f8fd; margin-top: 24px;
+    }
+    .portfolio img {
+      width: 95%; max-width: 240px; border-radius: 9px; margin: 1vw;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       display: block;
-      width: 100%;
-      margin-bottom: 1em;
+    }
+    .portfolio-list {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+    }
+    .portfolio-caption {
+      text-align: center; font-size: 0.98em; color: #333; margin-top: 0.3em;
+    }
+    .testimonials {
+      background: #fffbe7;
+      border-left: 4px solid var(--success);
+      margin-top: 1.5em;
+    }
+    .testimonial {
+      margin-bottom: 1.1em;
+      padding: 0.7em 1em 0.5em 1em;
+      border-radius: 7px;
+      background: #f4f4f4;
+      color: #333;
+    }
+    .testimonial-name {
+      font-weight: bold; color: var(--primary);
+      margin-bottom: 0.1em;
+    }
+    .testimonial-stars {
+      color: gold; font-size: 1.1em; margin-left: 0.3em;
+    }
+    .news {
+      background: #e9f7fa;
+      border-left: 4px solid var(--accent2);
+      margin-top: 1.2em;
+    }
+    .news-article {
+      margin-bottom: 0.8em; padding: 0.6em 0.8em; border-radius: 7px;
+      background: #fafdff; color: #222;
+    }
+    .news-title { font-weight: bold; }
+    .cta-floating {
+      position: fixed; bottom: 100px; right: 20px; z-index: 1001;
+      background: #ff4081; color: #fff; border-radius: 50px;
+      padding: 14px 26px; font-size: 1.1em; font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.16);
+      cursor: pointer; border: none;
+      transition: background 0.2s;
+      animation: ctaPulse 1.8s infinite;
+    }
+    .cta-floating:hover, .cta-floating:focus { background: #2405ee; }
+    @keyframes ctaPulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,64,129,0.5);}
+      70% { box-shadow: 0 0 0 15px rgba(255,64,129,0);}
+      100% { box-shadow: 0 0 0 0 rgba(255,64,129,0);}
+    }
+     /* WhatsApp Button */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      z-index: 1002;
+      background: #25d366;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: 
+        background var(--transition-speed) ease,
+        transform var(--transition-speed) ease;
     }
 
-    input, textarea, select {
-      padding: 0.5em;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    .whatsapp-btn:hover,
+    .whatsapp-btn:focus {
+      background: #128c7e;
+      transform: scale(1.1);
     }
-
-    button {
-      padding: 0.75em 1.5em;
-      background-color: #004080;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #002f5c;
-    }
-
+     /* DARK MODE */
     .dark {
-      background-color: #121212;
+      background: #121212;
       color: #f0f0f0;
     }
-
-    .dark .services, .dark .order-form, .dark .contact {
+    .dark .services,
+    .dark .order-form,
+    .dark .contact,
+    .dark #about,
+    .dark .hero {
       background-color: #1e1e1e;
+      color: #f0f0f0;
     }
-
-    @media (max-width: 768px) {
-  .nav-toggle {
-    display: block;
-  }
-
-  nav ul {
-    flex-direction: column;
-    display: none;
-    background-color: var(--nav-bg-color, #fff); /* Optional: Adjust based on your theme */
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    width: 200px;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  nav ul.active {
-    display: flex;
-  }
-
-  nav ul li {
-    margin: 10px 0;
-  }
-
-  .developer-info {
-    top: 70px;
-    right: 10px;
-    font-size: 0.7em;
-    padding: 3px 8px;
-    border-radius: 6px;
-  }
-
-  .developer-info img {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-   .static-bg-header {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.background-images {
-  display: flex;
-  width: 100%;
-  height: 200px; /* Adjust height as needed */
-  overflow: hidden;
-  position: relative;
-}
-
-.background-images img {
-  flex: 1;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-.background-images .stretch-horizontal {
-  transform: scaleX(1.5);
-  transform-origin: center;
-}
-
-/* Developer info floats over images */
-.developer-info {
-  position: absolute;
-  top: 2px;
-  right: 5px;
-  font-size: 0.911em;
-  background: rgba(0, 0, 0, 0.3);
-  color: white;
-  padding: 3px 8px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  z-index: 10;
-}
-
-.developer-info img {
-  width: 32px;
-  height: 42px;
-  border-radius: 50%;
-  border: 2px solid white;
-}
-/* Header text and nav */
-.header-content {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  background-color: #004080;
-  color: white;
-  margin-bottom: 0; /* No gap below */
-}
-
-/* The compressed image */
-.header-image {
-  width: 100%;
-  height: auto;
-  transform: scaleY(0.98);
-  transform-origin: bottom;
-  display: block;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
-  border: none;
-}
-
-/* Position the nav absolutely over the image and header-content */
-.nav-over-image {
-  position: absolute;
-  top: 12%;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  z-index: 10;
-  background: rgba(0, 64, 128, 0.6);
-  padding: 10px 0;
-}
-
-.nav-over-image ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  gap: 25px;
-}
-
-.nav-over-image ul li a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 15px;
-  border-radius: 999px; /* ellipse shape */
-  text-decoration: none;
-  font-size: 1.rem;
-  font-weight: bold;
-  color: white;
-  transition: background 0.3s ease;
-}
-
-/* Unique background colors for each */
-.nav-over-image ul li:nth-child(1) a {
-  background-color: #e74c3c; /* red */
-}
-
-.nav-over-image ul li:nth-child(2) a {
-  background-color: #3498db; /* blue */
-}
-
-.nav-over-image ul li:nth-child(3) a {
-  background-color: #2ecc71; /* green */
-}
-
-.nav-over-image ul li:nth-child(4) a {
-  background-color: #f1c40f; /* yellow */
-  color: black;
-}
-
-/* Optional hover effect */
-.nav-over-image ul li a:hover {
-  filter: brightness(1.1);
-}
-
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: block;
-  }
-
-  nav ul {
-    display: none;
-    flex-direction: column;
-  }
-
-  nav ul.active {
-    display: flex;
-  }
-}
-h1 {
-    text-align: center;
-}
-/* Fix background and text for content boxes in dark mode */
-.dark .services,
-.dark .order-form,
-.dark .contact,
-.dark #about,
-.dark .hero {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
-}
-
-/* Fix service cards */
-.dark .service-card {
-  background-color: #2a2a2a;
-  color: #fff;
-  border: 1px solid #444;
-}
-
-/* Fix form fields */
-.dark input,
-.dark textarea,
-.dark select {
-  background-color: #2b2b2b;
-  color: #f0f0f0;
-  border: 1px solid #555;
-}
-
-/* Fix form labels */
-.dark label {
-  color: #ccc;
-}
-
-/* Fix buttons */
-.dark button {
-  background-color: #333;
-  color: white;
-}
-
-.dark button:hover {
-  background-color: #555;
-}
-
-/* Optional: darken the footer */
-.dark footer {
-  background-color: #0d0d0d;
-  color: #ccc;
-}
-
-/* Optional: dark developer info */
-.dark .developer-info {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-.image-section img {
-  max-width: 100%;
-  height: auto;
-  margin: 10px 0;
-  border-radius: 50px;
-}
-.order-form {
-  max-width: 600px;
-  margin: 0 auto;
-  display: grid;
-  gap: 15px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: var(--card-bg, #fff);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.order-form label {
-  font-weight: 600;
-}
-
-.order-form input,
-.order-form select,
-.order-form textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.order-form textarea {
-  resize: vertical;
-}
-
-.submit-btn {
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.submit-btn:hover {
-  background-color: #0056b3;
-}
-
-
-/* Grid layout */
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
-  padding: 1rem;
-}
-
-/* Service card style */
-.service-card {
-  background-color: #f4f4f4;
-  color: #1a1a1a;
-  padding: 1rem;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease, background-color 0.3s ease;
-}
-
-.service-card a {
-  color: inherit;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-/* Hover effect */
-.service-card:hover {
-  transform: translateY(-4px);
-  background-color: #e0e0e0;
-}
-
-/* 🌙 Dark mode styles (if you use data-theme="dark") */
-[data-theme="dark"] .service-card {
-  background-color: #262626;
-  color: #f5f5f5;
-}
-
-[data-theme="dark"] .service-card:hover {
-  background-color: #333333;
-}
-
-[data-theme="dark"] .service-card a {
-  color: #ffffff;
-}
-.image-section {
-  display: flex;
-  flex-wrap: wrap; /* Allows images to wrap on small screens */
-  gap: 1rem;
-  justify-content: center;
-  margin: 2rem 0;
-  padding: 1rem;
-  border-bottom: 1px solid #ccc;
-}
-
-.image-section img {
-  max-width: 400px;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.image-section img:hover {
-  transform: scale(1.5);
-}
-
-
+    .dark .service-card {
+      background-color: #262626;
+      color: #f5f5f5;
+      border: 1px solid #444;
+    }
+    .dark .service-card:hover,
+    .dark .service-card:focus-within {
+      background-color: #333;
+    }
+    .dark input,
+    .dark textarea,
+    .dark select {
+      background-color: #232323;
+      color: #f0f0f0;
+      border: 1px solid #555;
+    }
+    .dark button {
+      background-color: #333;
+      color: white;
+    }
+    .dark button:hover, .dark button:focus {
+      background-color: #555;
+    }
+    .dark footer {
+      background-color: #0d0d0d;
+      color: #ccc;
+    }
+    .dark .developer-info {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    /* Modal styles for developer bio */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.6);
+      display: none; justify-content: center; align-items: center;
+      z-index: 9999;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-content {
+      background: #fff; color: #222; border-radius: 50%;
+      padding: 2em 1.5em; max-width: 340px; width: 90vw;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      text-align: center; position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 10px; right: 12px;
+      background: none; border: none; font-size: 1.7em; color: #d00; cursor: pointer;
+    }
+    .modal-content img {
+      width: 80px; height: 80px; border-radius: 50%; margin-bottom: 10px;
+      border: 2px solid #004080;
+    }
+    /* Newsletter */
+    .newsletter {
+      background: #f1f8e9;
+      text-align: center;
+      padding: 1em 0.8em;
+      border-radius: 8px;
+      margin: 1em auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      max-width: 420px;
+    }
+    .newsletter input[type="email"] {
+      padding: 8px; border-radius: 6px 0 0 6px; border: 1px solid #004080; font-size: 1em;
+      width: 60%; min-width: 120px; max-width: 220px;
+    }
+    .newsletter button[type="submit"] {
+      padding: 8px 16px; border-radius: 0 6px 6px 0; border: none;
+      background: #004080; color: #fff; font-weight: bold; font-size: 1em;
+      cursor: pointer; margin-left: -5px;
+    }
+    .newsletter button:focus, .newsletter button:hover { background: #002f5c; }
+    .newsletter .success { color: var(--success); margin-top: 0.7em; }
+    .newsletter .error { color: var(--danger); margin-top: 0.7em; }
+    /* Responsive */
+    @media (max-width: 990px) {
+      section { padding: 1.2em 2vw; }
+      .order-form { padding: 14px 6px; }
+    }
+    @media (max-width: 810px) {
+      .background-images { height: 110px; }
+      .header-image { max-height: 90px; }
+      .nav-over-image { padding: 5px 0;}
+      .service-grid {gap: 0.6rem;}
+      .service-card {font-size: 0.96em;}
+      .image-section img {max-width: 220px;}
+    }
+    @media (max-width: 850px) {
+      .background-images { height: 74px; }
+      .header-image { max-height: 200px; }
+      .nav-toggle { display: block; }
+      .nav-over-image {
+        position: static; background: var(--primary);
+        padding: 0; margin: 0;
+      }
+      .nav-over-image ul {
+        flex-direction: column; gap: 5px; display: none;
+        position: absolute; width: 25vw; left: 5vw; top: 48px;
+        background: rgba(0, 64, 128, 0.95); border-radius: 9px; padding: 12px 0; z-index: 99;
+      }
+      .nav-over-image ul.active { display: flex; }
+      .developer-info img { width: 22px; height: 22px; }
+      .service-card {padding: 0.4rem 0.1rem; min-width: 85px;}
+      .image-section img {max-width: 98vw;}
+      .order-form {padding: 10px 2vw;}
+      footer {font-size: 0.93em;}
+      .cta-floating { padding: 11px 18px; font-size: 1em; right: 12px; bottom: 80px;}
+      .whatsapp-btn { bottom: 20px; right: 10px; width: 42px; height: 42px;}
+      .whatsapp-btn img { width: 24px; height: 24px; }
+    }
   </style>
 </head>
 <body>
 <header class="static-bg-header">
-  <div class="background-images">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/machine.png?raw=true" alt="BG1">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/spiral.png?raw=true" alt="BG2">
-     <img class="stretch-horizontal" src="https://github.com/teklusha/BLATA-Printing-press/blob/main/colors.png?raw=true" alt="BG3">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/flag.png?raw=true" alt="BG4">
-    <!-- Developer info fixed on top -->
+  <div class="lang-switcher" aria-label="Language switcher">
+    <button id="langEn" class="active" onclick="switchLang('en')" aria-label="Switch to English">EN</button>
+    <button id="langTi" onclick="switchLang('ti')" aria-label="Switch to Tigrinya">ትግ</button>
+    <button id="langAm" onclick="switchLang('am')" aria-label="Switch to Amharic">አማ</button>
+  </div>
+  <div class="background-images" aria-hidden="true">
+    <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/machine.jpg?raw=true" alt="" />
+    <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/spiral.jpg?raw=true" alt="" />
+    <img class="stretch-horizontal" src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/colors.jpg?raw=true" alt="" />
+    <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/bio.jpg?raw=true" alt="mekelle" />
     <div class="developer-info">
-      <span>Dev: <a href="https://github.com/teklehabesha7" target="_blank">Teklush@MIT</a></span>
-       <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/my1.png?raw=true" alt="Developer Photo">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/bio.jpg?raw=true"
+        alt="Developer Photo"
+        id="devImage"
+        tabindex="0"
+        aria-label="Show developer biography" />
     </div>
   </div>
-
-  <!-- Site title and nav comes below images -->
- <div class="header-content">
-    <div class="nav-toggle" id="navToggle">&#9776;</div>
+  <div class="header-content">
+    <div class="nav-toggle" id="navToggle" tabindex="0" aria-label="Open navigation menu">&#9776;</div>
   </div>
-
-  <img class="header-image" src="https://github.com/teklusha/BLATA-Printing-press/blob/main/blata1.png?raw=true" />
-  <img class="header-image" src="https://github.com/teklusha/BLATA-Printing-press/blob/main/blata777.png?raw=true" />
-  
-  
-
- <nav class="nav-over-image">
-  <ul id="navMenu">
-    <li><a href="#services"><i class="fas fa-concierge-bell"></i> Services</a></li>
-    <li><a href="#order"><i class="fas fa-shopping-cart"></i> Order</a></li>
-    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-    <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
-  </ul>
-</nav>
+  <img class="header-image" src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/htmet.jpg?raw=true" alt="Image logo in Am" />
+  <img class="header-image" src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/blata7.jpg?raw=true" alt="BLATA Printing Shop Front" />
+  <nav class="nav-over-image" aria-label="Main navigation">
+    <ul id="navMenu">
+      <li><a href="#services"><i class="fas fa-concierge-bell"></i> <span data-tr="services">Services</span></a></li>
+      <li><a href="#order"><i class="fas fa-shopping-cart"></i> <span data-tr="order">Order</span></a></li>
+      <li><a href="#contact"><i class="fas fa-envelope"></i> <span data-tr="contact">Contact</span></a></li>
+      <li><a href="#about"><i class="fas fa-info-circle"></i> <span data-tr="about">About</span></a></li>
+    </ul>
+  </nav>
 </header>
 
+<!-- Modal for Developer Bio -->
+<div id="devModal" class="modal-overlay" tabindex="-1" aria-modal="true" aria-labelledby="devModalTitle">
+  <div class="modal-content" role="dialog">
+    <button class="modal-close" id="devModalClose" aria-label="Close biography">&times;</button>
+    <h2 id="devModalTitle" style="margin-bottom:0.2em;">Teklush@MIT</h2>
+    <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/profile2.jpg?raw=true"
+         alt="Teklush Developer Photo" />
+    <p style="margin-bottom:0.7em;"><b>Developer:</b> Teklush (Tekle Habesha)</p>
+    <p><b>Education:</b> MIT, B.Sc. in Electrical & Computer Engineering</p>
+    <p><b>Expertise:</b> Web Development, Computer system solutions and Digital data analysis, UI/UX</p>
+    <p>
+      <a href="mailto:teklush7mit@gmail.com">teklush7mit@gmail.com</a><br>
+      <a href="https://github.com/teklehabesha7" target="_blank" rel="noopener">GitHub Profile</a>
+    </p>
+  </div>
+</div>
 
-
+<main>
   <section class="hero">
-    <h2>Reliable. Respected. Renowned.</h2>
-    <p>Serving Mekelle and beyond with high-quality, professional printing solutions.</p>
-    <button onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+  <h1>💫BLATA💫 <br>🤷‍Digital Printing & Advertising🤷‍</h1>
+    <h2 data-tr="slogan">Reliable. Respected. Renowned.</h2>
+    <p data-tr="slogan-desc">🫷Serving Mekelle and beyond with high-quality, professional printing solutions🫸.</p>
+    <button onclick="toggleDarkMode()" aria-pressed="false" id="darkModeBtn">🌓 <span data-tr="toggle-dark">Toggle Dark Mode</span></button>
   </section>
 
   <section class="services" id="services">
-    <h1>Our Services</h1>
-  <h2 style="font-family: 'Times New Roman', serif; color: #00BFFF;">
-    Marketing, &nbsp;&nbsp; Business,&nbsp;&nbsp; Books,&nbsp;&nbsp; Event Printing&nbsp;&nbsp; & Custom Solutions – High-Quality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prints for Every Need!
-</h2>
-    <!-- Navigation Menu -->
-<div class="service-grid">
-    <div class="service-card"><a href="#banners">Large Banners</a></div>
-    <div class="service-card"><a href="#business-cards">Business Cards</a></div>
-    <div class="service-card"><a href="#books">Books</a></div>
-    <div class="service-card"><a href="#flyers">Flyers</a></div>
-    <div class="service-card"><a href="#receipts">Receipts</a></div>
-    <div class="service-card"><a href="#gift-card">Gift Card</a></div>
-    <div class="service-card"><a href="#wedding-cards">Wedding Cards</a></div>
-    <div class="service-card"><a href="#envelopes">Envelopes</a></div>
-    <div class="service-card"><a href="#tshirt">T-Shirt</a></div>
-    <div class="service-card"><a href="#bill-book">Bill Book</a></div>
-    <div class="service-card"><a href="#letterhead">Letterhead</a></div>
-    <div class="service-card"><a href="#all-items">All Types of Items!</a></div>
-</div>
-
-<!-- Image Sections -->
-<div class="image-section" id="banners">
-<img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/Lbanner.png?raw=true" alt="Large Banners">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/Lbanner1.png?raw=true" alt="Large Banners">
-<div class="image-section" id="business-cards">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/Bbussin1%20-%20Copy.png?raw=true" alt="Business Cards">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/bussyn.png?raw=true" alt="Business Cards">
-</div>
-<div class="image-section" id="books">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/books1.png?raw=true" alt="Books">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/books4.png?raw=true" alt="Books">
-</div>
-<div class="image-section" id="flyers">
-<img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/flyers3.png?raw=true" alt="Flyers">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/flyers.png?raw=true" alt="Flyers">
-</div>
-<div class="image-section" id="receipts">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/cash1.png?raw=true" alt="Receipts">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/receipts.png?raw=true" alt="Receipts">
-</div>
-<div class="image-section" id="gift-card">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/gifts3.jpg?raw=true" alt="Gift Card">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/gift2.png?raw=true" alt="Gift Card">
-      <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/gift.png?raw=true" alt="Gift Card">
-</div>
-<div class="image-section" id="wedding-cards">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/wedd3.jpg?raw=true" alt="Wedding Cards">
-     <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/wedding.jpg?raw=true" alt="Wedding Cards">
-</div>
-<div class="image-section" id="envelopes">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/envelop.jpg?raw=true" alt="Envelopes">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/envelop3.png?raw=true" alt="Envelopes">
-</div>
-<div class="image-section" id="tshirt">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/t-shirt1.jpg?raw=true" alt="T-Shirt">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/t-shirt.png?raw=true" alt="T-Shirt">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/tshirt.png?raw=true" alt="T-Shirt">
-</div>
-<div class="image-section" id="bill-book">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/bill%20book%20-%20Copy.png?raw=true" alt="Bill Book">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/billbook1.png?raw=true" alt="Bill Book">
-</div>
-<div class="image-section" id="letterhead">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/c9490627701039a9d4cf086fe3d35a53ee2832c8/letterhead-design-examples.jpg?raw=true" alt="Letterhead">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/letterhead2.jpg?raw=true" alt="Letterhead">
-</div>
-<div class="image-section" id="all-items">
-    <img src="https://github.com/teklusha/BLATA-Printing-press/blob/main/all%20item1.png?raw=true" alt="All Types of Items!">
-</div>
+    <h1 data-tr="our-services">Our Services</h1>
+    <h2 style="font-family: 'Times New Roman', serif; color: #00BFFF;" data-tr="services-desc">
+      Marketing, Business, Books, Event Printing & Custom Solutions – High-Quality Prints for Every Need!
+    </h2>
+    <div class="service-grid">
+      <div class="service-card"><a href="#banners" data-tr="banners">Large Banners</a></div>
+      <div class="service-card"><a href="#business-cards" data-tr="business-cards">Business Cards</a></div>
+      <div class="service-card"><a href="#books" data-tr="books">Books</a></div>
+      <div class="service-card"><a href="#flyers" data-tr="flyers">Flyers</a></div>
+      <div class="service-card"><a href="#receipts" data-tr="receipts">Receipts</a></div>
+      <div class="service-card"><a href="#gift-card" data-tr="gift-card">Gift Card</a></div>
+      <div class="service-card"><a href="#wedding-cards" data-tr="wedding-cards">Wedding Cards</a></div>
+      <div class="service-card"><a href="#envelopes" data-tr="envelopes">Envelopes</a></div>
+      <div class="service-card"><a href="#tshirt" data-tr="tshirt">T-Shirt</a></div>
+      <div class="service-card"><a href="#bill-book" data-tr="bill-book">Bill Book</a></div>
+      <div class="service-card"><a href="#letterhead" data-tr="letterhead">Letterhead</a></div>
+      <div class="service-card"><a href="#all-items" data-tr="all-items">All Types of Items!</a></div>
+    </div>
+    <!-- Images (same as before, omitted for brevity) -->
+    <!-- ... -->
   </section>
 
-  <section class="order-form" id="order">
-    <h2>Place Your Order</h2>
-    <form>
-      <label for="name">Your Full Name</label>
-      <input type="text" id="name" name="name" required />
+   <div class="image-section" id="banners">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/Lbanner.jpg?raw=true" alt="Large Banner printing sample" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/Lbanner1.jpg?raw=true" alt="Large Banner in use" />
+    </div>
+    <div class="image-section" id="business-cards">
+     <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/Bbussin1%20-%20Copy.jpg?raw=true" alt="Business Cards layout" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/bussynesss.jpg?raw=true" alt="Business Cards example" />
+    </div>
+    <div class="image-section" id="books">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/books1.jpg?raw=true" alt="Printed Books" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/books5.jpg?raw=true" alt="Book covers" />
+    </div>
+    <div class="image-section" id="flyers">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/flyers3.jpg?raw=true" alt="Flyers example" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/flyers1.jpg?raw=true" alt="Flyer design" />
+    </div>
+    <div class="image-section" id="receipts">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/receipts.png?raw=true" alt="Receipt sample" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/cash1.jpg?raw=true" alt="Receipt pad" />
+    </div>
+    <div class="image-section" id="gift-card">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/gifts3.jpg?raw=true" alt="Gift Card printing" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/gift1.jpg?raw=true" alt="Gift Card example" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/gift.jpg?raw=true" alt="Gift Card options" />
+    </div>
+    <div class="image-section" id="wedding-cards">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/wedd3.jpg?raw=true" alt="Wedding Card sample" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/wedding1.jpg?raw=true" alt="Wedding Card design" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/wedding.jpg?raw=true" alt="Wedding invitation" />
+    </div>
+    <div class="image-section" id="envelopes">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/envelop.jpg?raw=true" alt="Envelope printing" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/envelop44.jpg?raw=true" alt="Envelope example" />
+    </div>
+    <div class="image-section" id="tshirt">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/t-shirt1.jpg?raw=true" alt="T-shirt print sample" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/tshirt.jpg?raw=true" alt="Printed T-shirt" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/t-shirt.jpg?raw=true" alt="T-shirt designs" />
+    </div>
+    <div class="image-section" id="bill-book">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/billbook2.jpg?raw=true" alt="Bill Book sample" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/bill%20book%20-%20Copy.jpg?raw=true" alt="Bill Book" />
+    </div>
+    <div class="image-section" id="letterhead">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/letterhead-design-examples.jpg?raw=true" alt="Letterhead designs" />
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/letterhead2.jpg?raw=true" alt="Letterhead printing" />
+    </div>
+    <div class="image-section" id="all-items">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/allitem.jpg?raw=true" />
+    </div>
+  </section>
 
-      <label for="phone">Your Phone Number </label>
-      <input type="tel" id="phone" name="phone" pattern="09[0-9]{8}" required placeholder="e.g., 09xxxxxxxx" />
+  <section class="testimonials" id="testimonials">
+    <h2 data-tr="testimonials">Customer Testimonials</h2>
+    <div class="testimonial">
+      <span class="testimonial-name">Selam T.</span>
+      <span class="testimonial-stars">★★★★★</span>
+      <div data-tr="testimonial1">Fast delivery and top quality! Highly recommend BLATA for all printing needs in Mekelle.</div>
+    </div>
+    <div class="testimonial">
+      <span class="testimonial-name">Yohannes M.</span>
+      <span class="testimonial-stars">★★★★★</span>
+      <div data-tr="testimonial2">Professional team and beautiful results. Thank you for making our event special!</div>
+    </div>
+    <div class="testimonial">
+      <span class="testimonial-name">Rahel A.</span>
+      <span class="testimonial-stars">★★★★★</span>
+      <div data-tr="testimonial3">Easy to order online and great customer service. I’ll be back for sure.</div>
+    </div>
+  </section>
 
-     <label for="item">Type of Item</label>
-<select id="item" name="item" required>
-    <option value="">-- Select --</option>
+  <section class="order-form" id="order" aria-label="Order form">
+    <h2 data-tr="place-order">Place Your Order</h2>
+    <form method="POST" action="https://formspree.io/f/xanjepgl" enctype="multipart/form-data" autocomplete="on">
+      <label for="name" data-tr="your-name">Your Full Name</label>
+      <input type="text" id="name" name="name" required autocomplete="name" />
 
-    <!-- Marketing & Advertising Materials -->
-    <optgroup label="Marketing & Advertising">
-        <option value="banner">Banners</option>
-        <option value="flyer">Flyers</option>
-        <option value="poster">Posters</option>
-        <option value="brochure">Brochures</option>
-        <option value="sticker">Stickers & Labels</option>
-        <option value="voucher">Gift Vouchers</option>
-    </optgroup>
+      <label for="email" data-tr="your-email">Your Email Address</label>
+      <input type="email" id="email" name="email" required autocomplete="email" placeholder="your@email.com" />
 
-    <!-- Business & Professional Printing -->
-    <optgroup label="Business & Professional">
-        <option value="business-card">Business Cards</option>
-        <option value="letterhead">Letterheads</option>
-        <option value="envelope">Envelopes</option>
-        <option value="receipt">Receipts</option>
-        <option value="bill-book">Bill Books</option>
-        <option value="certificate">Certificates</option>
-    </optgroup>
+      <label for="phone" data-tr="your-phone">Your Phone Number</label>
+      <input type="tel" id="phone" name="phone" pattern="09[0-9]{8}" required autocomplete="tel" placeholder="e.g., 09xxxxxxxx" />
 
-    <!-- Books & Stationery -->
-    <optgroup label="Books & Stationery">
-        <option value="book">Books</option>
-        <option value="calendar">Calendars</option>
-        <option value="notebook">Notebooks</option>
-    </optgroup>
-
-    <!-- Event & Personal Printing -->
-    <optgroup label="Event & Personal">
-        <option value="wedding-card">Wedding & Invitation Cards</option>
-        <option value="menu">Menus</option>
-        <option value="tshirt">T-Shirts</option>
-        <option value="name-tag">Name Tags & Badges</option>
-        <option value="id-card">ID Cards</option>
-    </optgroup>
-
-    <!-- Government & Formal Documents -->
-    <optgroup label="Government & Formal">
-        <option value="invoice">Invoices</option>
-        <option value="tax-form">Tax Forms</option>
-        <option value="school-report">School Report Cards</option>
-        <option value="transcript">Academic Transcripts</option>
-        <option value="hotel-form">Hotel Registration Forms</option>
-        <option value="contract">Employee Contracts</option>
-        <option value="meeting-doc">Meeting & Conference Documents</option>
-        <option value="gov-form">Government Application Forms</option>
-        <option value="official-paper">Official Correspondence Papers</option>
-        <option value="payment-voucher">Payment Vouchers</option>
-    </optgroup>
-
-    <!-- Custom & Miscellaneous Printing -->
-    <optgroup label="Custom & Miscellaneous">
-        <option value="custom">Other Custom Printing</option>
-    </optgroup>
-</select>
-      <label for="description">Item Description</label>
+      <label for="item" data-tr="type-of-item">Type of Item</label>
+      <select id="item" name="item" required>
+        <option value="">-- <span data-tr="select">Select</span> --</option>
+        <optgroup label="Marketing & Advertising">
+          <option value="banner" data-tr="banners">Banners</option>
+          <option value="flyer" data-tr="flyers">Flyers</option>
+          <option value="poster" data-tr="poster">Posters</option>
+          <option value="brochure" data-tr="brochure">Brochures</option>
+          <option value="sticker" data-tr="sticker">Stickers & Labels</option>
+          <option value="voucher" data-tr="voucher">Gift Vouchers</option>
+        </optgroup>
+        <optgroup label="Business & Professional">
+          <option value="business-card" data-tr="business-cards">Business Cards</option>
+          <option value="letterhead" data-tr="letterhead">Letterheads</option>
+          <option value="envelope" data-tr="envelope">Envelopes</option>
+          <option value="receipt" data-tr="receipts">Receipts</option>
+          <option value="bill-book" data-tr="bill-book">Bill Books</option>
+          <option value="certificate" data-tr="certificate">Certificates</option>
+        </optgroup>
+        <optgroup label="Books & Stationery">
+          <option value="book" data-tr="books">Books</option>
+          <option value="calendar" data-tr="calendar">Calendars</option>
+          <option value="notebook" data-tr="notebook">Notebooks</option>
+        </optgroup>
+        <optgroup label="Event & Personal">
+          <option value="wedding-card" data-tr="wedding-cards">Wedding & Invitation Cards</option>
+          <option value="menu" data-tr="menu">Menus</option>
+          <option value="tshirt" data-tr="tshirt">T-Shirts</option>
+          <option value="name-tag" data-tr="name-tag">Name Tags & Badges</option>
+          <option value="id-card" data-tr="id-card">ID Cards</option>
+        </optgroup>
+        <optgroup label="Government & Formal">
+          <option value="invoice" data-tr="invoice">Invoices</option>
+          <option value="tax-form" data-tr="tax-form">Tax Forms</option>
+          <option value="school-report" data-tr="school-report">School Report Cards</option>
+          <option value="transcript" data-tr="transcript">Academic Transcripts</option>
+          <option value="hotel-form" data-tr="hotel-form">Hotel Registration Forms</option>
+          <option value="contract" data-tr="contract">Employee Contracts</option>
+          <option value="meeting-doc" data-tr="meeting-doc">Meeting & Conference Documents</option>
+          <option value="gov-form" data-tr="gov-form">Government Application Forms</option>
+          <option value="official-paper" data-tr="official-paper">Official Correspondence Papers</option>
+          <option value="payment-voucher" data-tr="payment-voucher">Payment Vouchers</option>
+        </optgroup>
+        <optgroup label="Custom & Miscellaneous">
+          <option value="custom" data-tr="custom">Other Custom Printing</option>
+        </optgroup>
+      </select>
+      <label for="description" data-tr="item-desc">Item Description</label>
       <textarea id="description" name="description" rows="3" placeholder="Describe design, size, colors, etc."></textarea>
-      <label for="file">Upload File for clarity (optional)</label>
-      <input type="file" id="file" name="file" />
+      <label for="file" data-tr="file-upload">Upload File for clarity (optional)</label>
+      <input type="file" id="file" name="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.zip,.rar,.ai,.psd,.svg" />
 
-      <label for="quantity">Number of Items</label>
+      <label for="quantity" data-tr="quantity">Number of Items</label>
       <input type="number" id="quantity" name="quantity" required min="1" />
 
-      <label for="address">Delivery Address</label>
-      <textarea id="address" name="address" rows="3" required></textarea>
+      <label for="address" data-tr="delivery-address">Delivery Address</label>
+      <textarea id="address" name="address" rows="2" required></textarea>
 
-      <label for="days">Maximum Waiting Days</label>
+      <label for="days" data-tr="max-wait">Maximum Waiting Days</label>
       <input type="number" id="days" name="days" min="1" max="30" required placeholder="e.g., 2" />
 
-      <label for="notes">Additional Notes (optional)</label>
-      <textarea id="notes" name="notes" rows="3"></textarea>
+      <label for="notes" data-tr="notes">Additional Notes (optional)</label>
+      <textarea id="notes" name="notes" rows="2"></textarea>
 
-      <button type="submit">Submit Order</button>
+      <input type="hidden" name="_replyto" value="teklush7mit@gmail.com" />
+
+      <button type="submit" data-tr="submit-order">Submit Order</button>
     </form>
   </section>
-  
-   <section id="about">
-    <h2>About Us</h2>
-    <p>BLATA Printing Press is one of the most trusted printing services in Mekelle. We are known for our premium quality, wide variety of services, and loyal customer base across regions. From offset to digital, from business to personal—we bring your ideas to life in print.</p>
+
+  <section class="newsletter" id="newsletter">
+    <form id="newsletterForm" autocomplete="off">
+      <label for="newsletterEmail" data-tr="newsletter-title"><b>Subscribe for updates, offers, and printing tips!</b></label><br>
+      <input type="email" id="newsletterEmail" name="newsletterEmail" required placeholder="Your email" aria-label="Your email" />
+      <button type="submit" data-tr="subscribe">Subscribe</button>
+      <div id="newsletterMsg"></div>
+    </form>
   </section>
 
+  <section class="news" id="news">
+    <h2 data-tr="news">Latest News & Offers</h2>
+    <div class="news-article">
+      <span class="news-title" data-tr="news1-title">🎉 Summer Printing Discounts!</span>
+      <p data-tr="news1-desc">Get 10% off on all banners and flyers until July 30, 2025. Use code: BLATA10. <b data-tr="news1-action">Order now!</b></p>
+    </div>
+    <div class="news-article">
+      <span class="news-title" data-tr="news2-title">🆕 New Digital Printing Machine</span>
+      <p data-tr="news2-desc">We have added the latest Konica Minolta press for even higher quality and faster service.</p>
+    </div>
+    <div class="news-article">
+      <span class="news-title" data-tr="news3-title">🌐 Now Accepting Online Payments</span>
+      <p data-tr="news3-desc">Pay for your orders using CBE, Telebirr or Paypall. Secure and convenient!</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 data-tr="about-title">About Us</h2>
+    <p data-tr="about-desc">BLATA Printing & Advertising is one of the most trusted printing services in Mekelle and beyond. We are known for our premium quality, wide variety of services, and loyal customer base across regions. From offset to digital, from business to personal—we bring your ideas to life in print.</p>
+  </section>
   <section class="contact" id="contact">
-    <h2>Contact Us</h2>
-    <p><strong>Address:</strong> Mekelle City, Zone 15, Ma'ikel-Tigray, beside Tigray Education Bureau</p>
-    <p><strong>Phone:</strong> +251914106121</p>
-    <p><strong>Email:</strong> Amanuelb@gmail.com</p>
-   <iframe src="https://www.google.com/maps?q=Mekele&output=embed" width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"></iframe>
+    <h2 data-tr="contact-title">Contact Us</h2>
+    <p><strong data-tr="address">Address:</strong> Mekelle City, Zone 15, Ma'ikel-Tigray, beside Tigray Education Bureau</p>
+    <p><strong data-tr="Manager Phone">Manager Phone:</strong> <a href="tel:+251914106121" aria-label="Call us">+251914106121</a></p>
+    <p><strong data-tr="Design & Layout">Design & Layout:</strong> <a href="tel:+251-9XX-XXX-XXX" aria-label="Call us">+251-9XX-XXX-XXX</a></p>
+    <p><strong data-tr="Banner Orders">Banner Orders:</strong> <a href="tel:+251-9XX-XXX-XXX" aria-label="Call us">+251-9XX-XXX-XXX</a></p>
+    <p><strong data-tr="Books Printing">Books Printing:</strong> <a href="tel:+251-9XX-XXX-XXX" aria-label="Call us">+251-9XX-XXX-XXX</a></p>
+    <p><strong data-tr="Custom Inquiries">Custom Inquiries:</strong> <a href="tel:+251-9XX-XXX-XXX" aria-label="Call us">+251-9XX-XXX-XXX</a></p>
+    <p><strong data-tr="email">Email:</strong> <a href="mailto:amanuelb@gmail.com">amanuelh@gmail.com</a><br>
+    <strong data-tr="order-email">Order Form Email:</strong> <a href="mailto:teklush7mit@gmail.com">teklush7mit@gmail.com</a>
+    </p>
+    <iframe src="https://www.google.com/maps?q=Mekele&output=embed" width="100%" height="280" allowfullscreen loading="lazy" title="Map of BLATA Printing Press location"></iframe>
   </section>
+</main>
+<footer>
+  <p>&copy; 2025 BLATA Printing Press. All rights reserved.</p>
+</footer>
 
-  <footer>
-    <p>&copy; 2025 BLATA Printing Press. All rights reserved.</p>
-  </footer>
+<!-- Floating CTA and WhatsApp -->
+<button class="cta-floating" onclick="location.href='#order'" aria-label="Order Now" data-tr="cta-order-now">Order Now</button>
+<a href="https://wa.me/251914106121" target="_blank" aria-label="Chat on WhatsApp" class="whatsapp-btn">
+  <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="Chat on WhatsApp">
+</a>
 
-  <script>
-  // Dark Mode Toggle
-  function toggleDarkMode() {
-    document.body.classList.toggle('dark');
+<script>
+/* Language translations (simple static dictionary for demo) */
+const translations = {
+  en: {
+    services: 'Services', order: 'Order', contact: 'Contact', about: 'About',
+    slogan: 'Reliable. Respected. Renowned.',
+    'slogan-desc': 'Serving Mekelle and beyond with high-quality, professional printing solutions.',
+    'toggle-dark': 'Toggle Dark Mode',
+    'our-services': 'Our Services',
+    'services-desc': 'Marketing, Business, Books, Event Printing & Custom Solutions – High-Quality Prints for Every Need!',
+    banners: 'Large Banners', 'business-cards': 'Business Cards', books: 'Books', flyers: 'Flyers', receipts: 'Receipts',
+    'gift-card': 'Gift Card', 'wedding-cards': 'Wedding Cards', envelopes: 'Envelopes', tshirt: 'T-Shirt', 'bill-book': 'Bill Book', letterhead: 'Letterhead', 'all-items': 'All Types of Items!',
+    portfolio: 'Portfolio / Gallery', 'portfolio-books': 'Book Printing', 'portfolio-banners': 'Large Banner', 'portfolio-wedding': 'Wedding Invitations', 'portfolio-tshirt': 'T-Shirt Printing',
+    testimonials: 'Customer Testimonials',
+    testimonial1: 'Fast delivery and top quality! Highly recommend BLATA for all printing needs in Mekelle.',
+    testimonial2: 'Professional team and beautiful results. Thank you for making our event special!',
+    testimonial3: 'Easy to order online and great customer service. I’ll be back for sure.',
+    'place-order': 'Place Your Order',
+    'your-name': 'Your Full Name', 'your-email': 'Your Email Address', 'your-phone': 'Your Phone Number',
+    'type-of-item': 'Type of Item', 'select': 'Select', poster: 'Posters', brochure: 'Brochures', sticker: 'Stickers & Labels', voucher: 'Gift Vouchers', envelope: 'Envelopes', certificate: 'Certificates', calendar: 'Calendars', notebook: 'Notebooks', menu: 'Menus', 'name-tag': 'Name Tags & Badges', 'id-card': 'ID Cards', invoice: 'Invoices', 'tax-form': 'Tax Forms', 'school-report': 'School Report Cards', transcript: 'Academic Transcripts', 'hotel-form': 'Hotel Registration Forms', contract: 'Employee Contracts', 'meeting-doc': 'Meeting & Conference Documents', 'gov-form': 'Government Application Forms', 'official-paper': 'Official Correspondence Papers', 'payment-voucher': 'Payment Vouchers', custom: 'Other Custom Printing',
+    'item-desc': 'Item Description', 'file-upload': 'Upload File for clarity (optional)', quantity: 'Number of Items', 'delivery-address': 'Delivery Address', 'max-wait': 'Maximum Waiting Days', notes: 'Additional Notes (optional)', 'submit-order': 'Submit Order',
+    'newsletter-title': 'Subscribe for updates, offers, and printing tips!',
+    subscribe: 'Subscribe',
+    news: 'Latest News & Offers',
+    'news1-title': '🎉 Summer Printing Discounts!',
+    'news1-desc': 'Get 10% off on all banners and flyers until July 30, 2025. Use code: BLATA10. ',
+    'news1-action': 'Order now!',
+    'news2-title': '🆕 New Digital Printing Machine',
+    'news2-desc': 'We have added the latest Konica Minolta press for even higher quality and faster service.',
+    'news3-title': '🌐 Now Accepting Online Payments',
+    'news3-desc': 'Pay for your orders using Chapa or Telebirr. Secure and convenient!',
+    'about-title': 'About Us',
+    'about-desc': 'BLATA Digital Printing & Advertising is one of the most trusted printing services in Mekelle and beyond. We are known for our premium quality, wide variety of services, and loyal customer base across regions. From offset to digital, from business to personal—we bring your ideas to life in print.',
+    'contact-title': 'Contact Us', address: 'Address:', phone: 'Phone:', email: 'Email:', 'order-email': 'Order Form Email:',
+    'cta-order-now': 'Order Now'
+  },
+  ti: {
+    services: 'ግልጋሎት', order: 'ትእዛዝ', contact: 'ንክትረኽቡና', about: 'ብዛዕባና',
+    slogan: 'እቲ ግሩም!፣ ዉሩይ!፣ ዉሕሉል!',
+    'slogan-desc': 'ኣብ መቐለን ካላኦት ከተማታትን ሙሉእ ግልጋሎት ናይ ሕትመትን መስታወቅያን ንህብ ።',
+    'toggle-dark': 'ጸሓይ/መሓል መደብ ቀይር',
+    'our-services': 'እንህቦም ግልጋሎት',
+    'services-desc': 'ማርኬቲንግ፣ ንግዲ፣ መጻሕፍቲ፣ ናይ ፍሉይ ዝግጅትን ኩሉ ዓይነት ሕትመትን ከም ልቦምን ከም ምርጫኦምን ምቅራብ።',
+    banners: 'ባነራት', 'business-cards': 'ቢዝነስ ካርድ', books: 'መጻሕፍቲ', flyers: 'ፍላየር', receipts: 'ደረሰኝ',
+    'gift-card': 'ናይ ውህብቶ ካርድ', 'wedding-cards': 'ናይ መርዓ ካር', envelopes: 'ኣንቬሎፕ', tshirt: 'ቲ-ሸርት', 'bill-book': 'መደብ-መጽሓፍ', letterhead: 'ናይ ደብዳቤ ርእሲ', 'all-items': ' ኩሉ ዓይነት አብዚ ይርከቡ!',
+    portfolio: 'ፎቶ ማዕከን', 'portfolio-books': 'ትምህርቲ መጻሕፍቲ', 'portfolio-banners': 'ባነር', 'portfolio-wedding': 'ናይ ሰርኣን ካርድ', 'portfolio-tshirt': 'ቲ-ሸርት',
+    testimonials: 'ምስክር',
+    testimonial1: ' ብላታ ብጽርየቱ ኣብዚ ግዜ ዉሕሉል ህትመት። አብ መቐለ ቅልጡፍ ሕትመት ብላታ ምርጫይ እዩ!',
+    testimonial2: 'ናይ ሞያ ቡድንን ምርጥ ውጽኢትን። ሓጎሰና ምስ ብላታ እዩ!',
+    testimonial3: 'ቅልጡፍ ናይ ኦንላይን ግልጋሎት አለዎም። ከመኡውን ቅጡፋት እዮም ።',
+    'place-order': 'ትእዛዞም የቅርቡ',
+    'your-name': 'ሙሉ ስሞም/ን', 'your-email': 'ኢሜይል', 'your-phone': 'ቁጽሪ ስልኪ',
+    'type-of-item': 'ዓይነት አቅሓ', 'select': 'ይምረፅ',
+    poster: 'ፖስተር', brochure: 'ብሮሸር', sticker: 'ስቲከር', voucher: 'ናይ ውህብቶ ካርድ', envelope: 'ኣንቬሎፕ', certificate: 'ሰነድ', calendar: 'ካላንደር', notebook: 'መስታወስያ', menu: 'ሜኑ', 'name-tag': 'ስም ታግ', 'id-card': 'መለለይ ካርድ', invoice: 'ተወካይ ደረሰኝ', 'tax-form': 'ፎርሚ', 'school-report': 'ወረቐት ውጽኢት ትምህርቲ', transcript: 'ትርጓሜ ማህበር', 'hotel-form': 'ፎርም ሆቴል', contract: 'ውዕሊ', 'meeting-doc': 'ውሳኔ ሰነድ', 'gov-form': 'መንግስታዊ ፎርም', 'official-paper': 'መደብ ሰነድ', 'payment-voucher': 'ናይ ክፍሊት ቫውቸር', custom: 'ፍዩይ ሕትመት',
+    'item-desc': 'ነቲ ዓቅሓ መብራህርሂ', 'file-upload': 'ናይቲ ኣቅሓ ምስሊ (ከም ምርጨኦም)', quantity: 'በዝሒ ብፍረ/ብሓባ', 'delivery-address': 'ዝርከብሉ ቦታ', 'max-wait': 'ንመኣዝ ዕለት ይደልይዎ', notes: 'ተወሳኺ ዝደለይዎ ሓሳብ (ከም ምርጨኦም)', 'submit-order': 'ትእዛዝ ይልኣኹ',
+    'newsletter-title': 'ን ሓደሽቲ ንሓበሬታን ዝቀነሰ ሽያጥን ኣብዚ ይመዝገቡ!',
+    subscribe: 'ይመዝገቡ',
+    news: 'ሓደሽቲ ዋጽኢትን ከማኡ ውን ብዝቀነሰ ዋጋን ',
+    'news1-title': '🎉 ናይ ክረምቲ ዝቀነሰ ዋጋ ህትመት!',
+    'news1-desc': 'እስካብ ጁላይ 30፣ 2025 ናይ ባነርን ፍላየርን ናይ 10% ቅነሳ ንገብር። ኮድ: BLATA10 ',
+    'news1-action': 'ኣዘዝ አልከ!',
+    'news2-title': '🆕 ሓድሽ ዲጂታል ሕትመት ማሽን',
+    'news2-desc': 'አዚዩ ዝበለጽን ዘመኑ ዝሓለወን ግልጋሎት ንምሃብ ሓዱሽ ናይ ኮኒካ ሚኖልታ ማሽን ኣእቲውና።',
+    'news3-title': '🌐 ኣብዚ ብ ኦንላይን ምኽፋል ይኸእሉ እዮም',
+    'news3-desc': 'ብ CBE ብ Telebirr ከምኡ ብ Paypall ምኽፋል ይኸእሉ እዮም!',
+    'about-title': 'ብዛዕባና',
+    'about-desc': 'ንሕና ብላታ ቤት ሕትመትን መስታወቅያን ኣድራሻና ከተማ መቀለ ቀበሌ 15 ማእከል ትግራይ : ሰምዬናዊ ጎኒ ትግራይ ትምህርቲ ቢሮ ኮይኑ (BLATA Printing & Advertising) ኣብ መቐለ ካብ ዝርከቡ ድርጅታት ብጽፉፍ ኣገልግሎቱ ዝተለለየ እዩ። ብልዑል ጽርየት ምህርቲ፣ ሰፊሕ ዓይነት ኣገልግሎታት (ካብ ኦፈሴት ክሳብ ዲጂታል ፣ ናይ ንግዲ ፕሮሞሽናዊ ስራሕቲ፣ ውልቃው ዕዮታትን ይኹን ካለኦትን ንሰርሕ)።  ስለዚ ዚ ድማ ነዚ ግልጋሎትና ዝመርጽ ብዙሓት ተገልገልቲ ዓማዊልን ትካላትን ምሳና ብምህላዎም ሓጎስና ዝደመቀ እዩ። ንሓሳባትኩም ብቕልጡፍ፣ ብጽፉፍ፣ ከምኡውን ብተመጣጣኒ ዋጋ ናብኹም ብምቅራብ ኣገልግሎትና ምቹው ይገብሮ። ንስኻትኩም ድማ  ናይ አገልግሎትና ተጠቀምቲ ክትኮኑ ንላበዎኩም ።',
+    'contact-title': 'ንርከበሉ አድራሻ', address: 'ኣድራሻ:', phone: 'ስልኪ:', email: 'ኢሜይል:', 'order-email': 'ኣድራሻ ትእዛዝ',
+    'cta-order-now': 'ሐዚ ይእዘዙ'
+  },
+  am: {
+    services: 'አገልግሎቶች', order: 'ትዕዛዝ', contact: 'አግኙን', about: 'ስለ እኛ',
+    slogan: 'ልዩ፣ ጥራቱን የጠበቀ፣ በስራው የታወቀ።',
+    'slogan-desc': 'በሙያዊ እና ከፍተኛ ጥራት ያለው የህትመትና ማስታወቅያ አገልግሎት በመቐሌ እና ሌሎች ከተሞች ጥራቱን የጠበቀ ኣገልግሎት እንሰጣለን።',
+    'toggle-dark': 'ጨለማ/ብርሃን ማዕከል',
+    'our-services': 'አገልግሎቶቻችን',
+    'services-desc': 'ለግብይት፣ ንግድ፣ መጽሐፍት እና ማነኛውም ዝግጅቶች - ሁሉንም የህትመት ፍላጎታቸውን በከፍተኛ ጥራት እናሟላለን!',
+    banners: 'ባነር', 'business-cards': 'የንግድ ካርድ', books: 'መጽሐፍት', flyers: 'ፍላየር', receipts: 'ደረሰኝ',
+    'gift-card': 'የልግስ ካርድ', 'wedding-cards': 'የሰርግ ካርድ', envelopes: 'አንቬሎፕ', tshirt: 'ቲ-ሸርት', 'bill-book': 'ቢል መጽሐፍ', letterhead: 'የደብዳቤ ርዕስ', 'all-items': 'ሁሉንም ዓይነት!',
+    portfolio: 'ፎቶ ቅርጸት', 'portfolio-books': 'መጽሐፍት', 'portfolio-banners': 'ባነር', 'portfolio-wedding': 'የሰርግ ካርድ', 'portfolio-tshirt': 'ቲ-ሸርት',
+    testimonials: 'ምስክሮች',
+    testimonial1: 'ፈጣን አቅርቦትና ከፍተኛ ጥራት። በመቀሌ ለማተሚያ የሚፈልጉ ሁሉ በBLATA ያትኩሩ።',
+    testimonial2: 'ሙያዊ ቡድንና ውብ ውጤት። በተለያዩ ስራዎቻቸው አመሰግናለሁ!',
+    testimonial3: 'ኦንላይን ትዕዛዝ እና በጥሩ የደንበኛ አገልግሎት። ደግሞ ይሰጣሉ።',
+    'place-order': 'ትዕዛዝ ያቅርቡ',
+    'your-name': 'ሙሉ ስምዎ', 'your-email': 'ኢሜይል', 'your-phone': 'ስልክ ቁጥር',
+    'type-of-item': 'የእቃው አይነት', 'select': 'ይምረጡ',
+    poster: 'ፖስተር', brochure: 'ብሮሸር', sticker: 'ስቲከር', voucher: 'የልግስ ካርድ', envelope: 'አንቬሎፕ', certificate: 'የምስክር ወረቀት', calendar: 'ካሌንደር', notebook: 'ኖትቡክ', menu: 'ሜኑ', 'name-tag': 'የስም ሰነድ', 'id-card': 'መታወቂያ ካርድ', invoice: 'ደረሰኝ', 'tax-form': 'የግብር ፎርም', 'school-report': 'የትምህርት ውጤት', transcript: 'የትምህርት ማስረጃ', 'hotel-form': 'የሆቴል ፎርም', contract: 'የሥራ ውል', 'meeting-doc': 'የስብሰባ ሰነድ', 'gov-form': 'የመንግስት ፎርም', 'official-paper': 'የመደበኛ ሰነድ', 'payment-voucher': 'የክፍያ ቫውቸር', custom: 'ሌላ ማተሚያ',
+    'item-desc': 'የእቃው መግለጫ', 'file-upload': 'የእቃው ምስል በፋይል ያስገቡ (አስፈላጊ ከሆነ)', quantity: 'ብዛት', 'delivery-address': 'የትዕዛዝ አድራሻ', 'max-wait': 'የሚፈልጉበት ዕለት', notes: 'ተጨማሪ ሓሳብ', 'submit-order': 'ትዕዛዝ ያቅርቡ',
+    'newsletter-title': 'ለአዳዲስ ማስታወቂያዎች እና ቅናሽ ይመዝገቡ!',
+    subscribe: 'ይመዝገቡ',
+    news: 'የቅርብ ጊዜ ዜና እና ቅናሽ',
+    'news1-title': '🎉 የወቅቱ የቅናሽ ማተሚያ!',
+    'news1-desc': 'እስከ ጁላይ 30፣ 2025 በሁሉም ባነርና ፍላየር ላይ 10% ቅናሽ እናደርጋለን። ኮድ: BLATA10',
+    'news1-action': 'አሁን ይዘዙ!',
+    'news2-title': '🆕 አዲስ የዲጂታል ማተሚያ',
+    'news2-desc': 'ከፍተኛ ጥራትና ፈጣን አገልግሎት ለማቅረብ አዳዲስ ማሽኖች አስገብተናል።',
+    'news3-title': '🌐 አሁን ኦንላይን መክፈል ይችላሉ',
+    'news3-desc': 'በCBE በTelebirr እናም በ Paypall መክፈል ይችላሉ።',
+    'about-title': 'ስለ እኛ',
+    'about-desc': 'ብላታ ህትመት እና ማስታወቂያ (BLATA Printing & Advertising) በመቀለ ከተማ ቀበሌ 15 ማዕከል ትግራይ ከትምህርት ቢሮ አጠገብ የምንገኝ ሲሆን፣ በመቀለ ካሉት የህትመት አገልግሎቶች ልዩ ጥራት አለን። በተለየ የስራ ጥራት፣ ሰፊ የአገልግሎት ዝርዝር (ከኦፈሴት እስከ ዲጂታል ህትመት፣ የንግድ ስራዎች፣ እንዲሁም የግል ፕሮጀክቶች እና ሌሎች ብዙ የሕትመትና ማስታወቅያ ስራዎች)፣ ስለዚህ ብዙ ተደጋጋሚ ደንበኞችና ተቋማት የሚመርጡን ድርጅት ሆነን በመገኘታችን እናመሰግናለን። ሀሳብዎን በፍጥነት፣ በጥራት እና በሚመጥን ዋጋ ወደ ህትመት በማምጣት አገልግሎታችንን እናቀርባለን። እርስዎም ከአገልግሎታችን ተጠቃሚ እንዲሆኑ እንጋብዝዎታለን!',
+    'contact-title': 'አግኙን', address: 'አድራሻ:', phone: 'ስልክ:', email: 'ኢሜይል:', 'order-email': 'የትዕዛዝ ኢሜይል',
+    'cta-order-now': 'አሁን ይዘዙ'
   }
-
-  // Responsive Nav Toggle
-  const navToggle = document.getElementById('navToggle');
-  const navMenu = document.getElementById('navMenu');
-
-  navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+};
+let currentLang = 'en';
+function switchLang(lang) {
+  if (!translations[lang]) return;
+  currentLang = lang;
+  document.querySelectorAll('[id^="lang"]').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('lang' + lang.charAt(0).toUpperCase() + lang.slice(1)).classList.add('active');
+  document.querySelectorAll('[data-tr]').forEach(el => {
+    const key = el.getAttribute('data-tr');
+    if (translations[lang][key]) el.textContent = translations[lang][key];
   });
-</script>
+  // Update select options
+  document.querySelectorAll('option[data-tr]').forEach(opt => {
+    const key = opt.getAttribute('data-tr');
+    if (translations[lang][key]) opt.textContent = translations[lang][key];
+  });
+}
+switchLang('en'); // Default
 
+// Dark Mode Toggle
+function toggleDarkMode() {
+  document.body.classList.toggle('dark');
+  var btn = document.getElementById('darkModeBtn');
+  var pressed = btn.getAttribute('aria-pressed') === 'true';
+  btn.setAttribute('aria-pressed', !pressed);
+}
+
+// Responsive Nav Toggle + close on click/esc
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+navToggle.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+navToggle.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') navMenu.classList.toggle('active'); });
+navMenu.addEventListener('keydown', (e) => { if (e.key === 'Escape') navMenu.classList.remove('active'); });
+navMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => { if (window.innerWidth <= 600) navMenu.classList.remove('active'); });
+});
+
+// Modal for developer bio
+const devImage = document.getElementById('devImage');
+const devModal = document.getElementById('devModal');
+const devModalClose = document.getElementById('devModalClose');
+devImage.addEventListener('click', () => { devModal.classList.add('active'); devModal.focus(); });
+devImage.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { devModal.classList.add('active'); devModal.focus(); } });
+devModalClose.addEventListener('click', () => { devModal.classList.remove('active'); devImage.focus(); });
+devModal.addEventListener('click', e => { if (e.target === devModal) { devModal.classList.remove('active'); devImage.focus(); } });
+document.addEventListener('keydown', e => { if (devModal.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) { devModal.classList.remove('active'); devImage.focus(); } });
+
+// Newsletter AJAX (simulated, for demo)
+document.getElementById('newsletterForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const email = document.getElementById('newsletterEmail').value.trim();
+  const msgDiv = document.getElementById('newsletterMsg');
+  msgDiv.textContent = '';
+  if (!email.match(/^[^@]+@[^@]+\.[^@]+$/)) {
+    msgDiv.textContent = (currentLang === 'en') ? 'Please enter a valid email.' : (currentLang === 'ti') ? 'በይዘኦም ትኽክለኛ ኢሜይል የእትዉ!' : 'እባክዎ ትክክለኛ ኢሜይል ያስገቡ።';
+    msgDiv.className = 'error';
+    return;
+  }
+  msgDiv.textContent = (currentLang === 'en') ? 'Thank you for subscribing!' : (currentLang === 'ti') ? 'ስለ ዝተመዝገቡ ነመስግን' : 'ስለተመዝገቡ እናመሰናለን!';
+  msgDiv.className = 'success';
+  document.getElementById('newsletterEmail').value = '';
+});
+</script>
 </body>
 </html>
