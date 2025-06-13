@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -32,35 +32,122 @@
       padding: 1em 0 0 0;
       position: relative;
     }
-     /* Header Styles */
-    .developer-info {
-      position: relative;
-      top: var(--space-xs);
-      right: var(--space-xs);
-      z-index: 10;
-    }
+    /* Developer Icon */
+.dev-icon-container {
+  position: fixed;
+  top: 7px;
+  right: 5px;
+  z-index: 1000;
+}
 
-    .developer-info img {
-      width: 8px;
-      height: 8px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 1px solid white;
-      cursor: pointer;
-      transition: 
-        transform var(--transition-speed) ease,
-        box-shadow var(--transition-speed) ease;
-    }
+.dev-icon-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
 
-    .developer-info img:hover,
-    .developer-info img:focus {
-      transform: scale(1.1);
-      box-shadow: 0 0 0 3px var(--accent1);
-      outline: none;
-    }
+.dev-icon {
+  width: 31px;
+  height: 41px;
+  border-radius: 50%;
+  border: 2px solid #ffcc00;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+}
 
+.dev-icon-btn:hover .dev-icon {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255,204,0,0.8);
+}
+
+/* Bio Modal */
+.bio-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 100px;
+  width: 90%;
+  max-width: 500px;
+  padding: 20px;
+  position: relative;
+  animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.bio-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.bio-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #004080;
+}
+
+.credentials span {
+  display: inline-block;
+  background: #f0f7ff;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.contact-info {
+  margin-top: 20px;
+}
+
+.contact-info i {
+  width: 20px;
+  color: #004080;
+  margin-right: 10px;
+}
+
+/* Dark Mode Support */
+.dark .modal-content {
+  background: #1e1e1e;
+  color: white;
+}
+
+.dark .credentials span {
+  background: #2d3748;
+}
     .lang-switcher {
-      position: absolute; left: 10px; top: 10px; z-index: 40;
+      position: fixed; left: 10px; top: 10px; z-index: 40;
     }
     .lang-switcher button {
       background: #fff; color: #004080; border: 1px solid #004080;
@@ -98,9 +185,9 @@
       line-height: 0; border: none;
     }
     .nav-over-image {
-      position: absolute; top: 11.5%; left: 0; width: 40%;
-      display: flex; justify-content: center; z-index: 15;
-      background: rgba(0, 64, 128, 0.96); padding: 8px 0;
+      position: fixed; top: 18.3%; left: 0; width: 40%;
+      display: flex; justify-content: center; z-index: 1115;
+      background: rgba(0, 64, 128, 0.01); padding: 8px 0;
     }
     .nav-over-image ul {
       margin: 0; padding: 0; list-style: none; display: flex; gap: 18px;
@@ -276,45 +363,106 @@
       background: #121212;
       color: #f0f0f0;
     }
-    .dark .services,
-    .dark .order-form,
-    .dark .contact,
-    .dark #about,
-    .dark .hero {
-      background-color: #1e1e1e;
-      color: #f0f0f0;
-    }
-    .dark .service-card {
-      background-color: #262626;
-      color: #f5f5f5;
-      border: 1px solid #444;
-    }
-    .dark .service-card:hover,
-    .dark .service-card:focus-within {
-      background-color: #333;
-    }
-    .dark input,
-    .dark textarea,
-    .dark select {
-      background-color: #232323;
-      color: #f0f0f0;
-      border: 1px solid #555;
-    }
-    .dark button {
-      background-color: #333;
-      color: white;
-    }
-    .dark button:hover, .dark button:focus {
-      background-color: #555;
-    }
-    .dark footer {
-      background-color: #0d0d0d;
-      color: #ccc;
-    }
-    .dark .developer-info {
-      background: rgba(255,255,255,0.1);
-      color: white;
-    }
+    /* DARK MODE TOGGLE BUTTON */
+.fixed-toggle {
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  padding: 10px 15px;
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.fixed-toggle:hover {
+  background-color: #002f5c;
+  padding-left: 20px;
+}
+/* DARK MODE TOGGLE BUTTON */
+.dark-mode-toggle {
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.toggle-icon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover .toggle-icon {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.7));
+}
+
+/* DARK MODE STYLES */
+.dark {
+  background: #121212;
+  color: #f0f0f0;
+}
+.dark .services,
+.dark .order-form,
+.dark .contact,
+.dark #about,
+.dark .hero {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+.dark .service-card {
+  background-color: #262626;
+  color: #f5f5f5;
+  border: 1px solid #444;
+}
+.dark .service-card:hover,
+.dark .service-card:focus-within {
+  background-color: #333;
+}
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #232323;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+.dark button:not(.dark-mode-toggle) {
+  background-color: #333;
+  color: white;
+}
+.dark button:not(.dark-mode-toggle):hover, 
+.dark button:not(.dark-mode-toggle):focus {
+  background-color: #555;
+}
+.dark footer {
+  background-color: #0d0d0d;
+  color: #ccc;
+}
+.dark .developer-info {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+.dark .toggle-icon {
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+}
     /* Modal styles for developer bio */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -324,7 +472,7 @@
     }
     .modal-overlay.active { display: flex; }
     .modal-content {
-      background: #fff; color: #222; border-radius: 50%;
+      background: #fff; color: #222; border-radius: 17%;
       padding: 2em 1.5em; max-width: 340px; width: 90vw;
       box-shadow: 0 8px 32px rgba(0,0,0,0.18);
       text-align: center; position: relative;
@@ -334,7 +482,7 @@
       background: none; border: none; font-size: 1.7em; color: #d00; cursor: pointer;
     }
     .modal-content img {
-      width: 80px; height: 80px; border-radius: 50%; margin-bottom: 10px;
+      width: 65px; height: 80px; border-radius: 50%; margin-bottom: 10px;
       border: 2px solid #004080;
     }
     /* Newsletter */
@@ -375,7 +523,7 @@
     @media (max-width: 850px) {
       .background-images { height: 74px; }
       .header-image { max-height: 200px; }
-      .nav-toggle { display: block; }
+      .nav-toggle { display: block; font-size: 2.1em; top: 72px; color: white; }
       .nav-over-image {
         position: static; background: var(--primary);
         padding: 0; margin: 0;
@@ -383,7 +531,7 @@
       .nav-over-image ul {
         flex-direction: column; gap: 5px; display: none;
         position: absolute; width: 25vw; left: 5vw; top: 48px;
-        background: rgba(0, 64, 128, 0.95); border-radius: 9px; padding: 12px 0; z-index: 99;
+        background: rgba(0, 64, 128, 0.015); border-radius: 9px; padding: 12px 0; z-index: 99;
       }
       .nav-over-image ul.active { display: flex; }
       .developer-info img { width: 22px; height: 22px; }
@@ -398,6 +546,44 @@
   </style>
 </head>
 <body>
+ <!-- Developer Icon (place right after <body>) -->
+<div class="dev-icon-container">
+  <button class="dev-icon-btn" aria-label="Developer information">
+    <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/bio.jpg?raw=true" 
+         alt="Developer" 
+         class="dev-icon">
+  </button>
+</div>
+
+<!-- Bio Modal (place before </body>) -->
+<div class="bio-modal" id="bioModal">
+  <div class="modal-content">
+    <button class="close-modal">&times;</button>
+    <div class="bio-header">
+      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/profile2.jpg?raw=true" 
+           alt="Teklush" 
+           class="bio-avatar">
+      <div>
+        <h2>Tekle Habesha</h2>
+        <h3>Web Developer</h3>
+        <div class="credentials">
+          <span>Web Specialist</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bio-body">
+      <h4>Professional Profile</h4>
+      <p>MU-Student, & now specializing in web development, system solutions, and data analytics.</p>
+      
+      <div class="contact-info">
+        <p><i class="fas fa-envelope"></i> teklush7mit@gmail.com</p>
+        <p><i class="fas fa-phone"></i> +251 990 010 550</p>
+        <p><i class="fab fa-github"></i> github.com/teklehabesha7</p>
+      </div>
+    </div>
+  </div>
+</div>
 <header class="static-bg-header">
   <div class="lang-switcher" aria-label="Language switcher">
     <button id="langEn" class="active" onclick="switchLang('en')" aria-label="Switch to English">EN</button>
@@ -408,19 +594,12 @@
     <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/machine.jpg?raw=true" alt="" />
     <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/spiral.jpg?raw=true" alt="" />
     <img class="stretch-horizontal" src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/colors.jpg?raw=true" alt="" />
-    <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/bio.jpg?raw=true" alt="mekelle" />
-    <div class="developer-info">
-      <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/bio.jpg?raw=true"
-        alt="Developer Photo"
-        id="devImage"
-        tabindex="0"
-        aria-label="Show developer biography" />
-    </div>
+    <img src="https://github.com/teklusha/BLATA-Printing-Advertising/blob/main/4th.jpg?raw=true" alt="mekelle" />
   </div>
   <div class="header-content">
     <div class="nav-toggle" id="navToggle" tabindex="0" aria-label="Open navigation menu">&#9776;</div>
   </div>
-  <img class="header-image" src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/htmet.jpg?raw=true" alt="Image logo in Am" />
+  <img class="header-image" src="https://github.com/teklusha/BLATA-Printing-Advertising/blob/main/tiglogo1.png?raw=true" alt="Image logo in Am" />
   <img class="header-image" src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/blata7.jpg?raw=true" alt="BLATA Printing Shop Front" />
   <nav class="nav-over-image" aria-label="Main navigation">
     <ul id="navMenu">
@@ -431,7 +610,6 @@
     </ul>
   </nav>
 </header>
-
 <!-- Modal for Developer Bio -->
 <div id="devModal" class="modal-overlay" tabindex="-1" aria-modal="true" aria-labelledby="devModalTitle">
   <div class="modal-content" role="dialog">
@@ -440,7 +618,7 @@
     <img src="https://github.com/teklsh/BLATA-PRITNING-ADVERTISING/blob/main/profile2.jpg?raw=true"
          alt="Teklush Developer Photo" />
     <p style="margin-bottom:0.7em;"><b>Developer:</b> Teklush (Tekle Habesha)</p>
-    <p><b>Education:</b> MIT, B.Sc. in Electrical & Computer Engineering</p>
+    <p><b>Education:</b> MU, B.Sc. in Electrical & Computer Engineering</p>
     <p><b>Expertise:</b> Web Development, Computer system solutions and Digital data analysis, UI/UX</p>
     <p>
       <a href="mailto:teklush7mit@gmail.com">teklush7mit@gmail.com</a><br>
@@ -448,6 +626,9 @@
     </p>
   </div>
 </div>
+<button class="dark-mode-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+  <span class="toggle-icon">🌓</span>
+</button>
 
 <main>
   <section class="hero">
@@ -686,6 +867,30 @@
   <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="Chat on WhatsApp">
 </a>
 
+<script>
+// Modal functionality
+const devBtn = document.querySelector('.dev-icon-btn');
+const modal = document.getElementById('bioModal');
+const closeBtn = document.querySelector('.close-modal');
+
+devBtn.addEventListener('click', () => {
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // Prevent scrolling
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+});
+
+// Close when clicking outside content
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+});
+</script>
 <script>
 /* Language translations (simple static dictionary for demo) */
 const translations = {
